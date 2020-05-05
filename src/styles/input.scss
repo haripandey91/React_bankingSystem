@@ -1,0 +1,22 @@
+.input {
+    width: 50vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1vh;
+    font-size: inherit;
+    input {
+      width: 30vw;
+    }
+    textarea {
+      width: 30vw;
+    }
+    .input-label {
+      width: 30%;
+      text-align: right;
+    }
+    .input-content {
+      width: 70% !important;
+    }
+  }
+  

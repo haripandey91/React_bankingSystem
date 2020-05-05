@@ -36,3 +36,26 @@
     transform: rotate(360deg);
   }
 }
+
+.header {
+  height: 10vh;
+  width:100vw;
+  background-color: #282c34;
+  color: #FFFf;
+  text-align: center;
+  
+
+}
+.header-logo{
+  animation: App-logo-spin infinite 20s linear;
+  padding: 3vh;
+
+}
+.register{
+  width:90vw;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+}

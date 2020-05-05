@@ -1,26 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState, useEffect}from 'react';
 import './App.css';
+import Register from './pages/Register'
+import Header from "./Components/Header"
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  
+const [sregister, setsRegister] = useState("Login");
+
+const onClickHandaler=(e)=>{  
+setsRegister(e.target.value)
 }
 
+  return (
+    <div>
+      <Header heading ="bank"/>
+      {sregister ==="Login" ?
+      <Register
+       info="Hari" 
+      Uname="uname"
+      Pname="Lname"
+      RclassName="btn btn-info" 
+      LclassName="btn btn-success"
+      Rvalue="register"
+      Lvalue="Login"
+      heading="Information"
+      info="this is for login"
+      RonClick = {onClickHandaler}
+
+
+      />:
+      <Register
+      info="Hari" 
+     Uname="uname"
+     Pname="Lname"
+     RclassName="btn btn-info" 
+     LclassName="btn btn-success"
+     Rvalue="Save"
+     heading="Information"
+     info="this is for login"
+     RonClick = {onClickHandaler}
+     />}
+    </div>
+  )}
+  
 export default App;

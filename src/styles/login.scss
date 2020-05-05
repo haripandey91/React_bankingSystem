@@ -1,0 +1,25 @@
+.login{
+    width:45%;
+    background-color: blue;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2vw;
+
+    .heading{
+        width:100%;
+    }
+     .inputs, .buttons{
+        width:100%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction:column;
+        justify-content: center;
+        align-items: center;
+        input{
+            width:100%
+        }
+        }
+        .buttons{
+            flex-direction: row;
+        }
+}
