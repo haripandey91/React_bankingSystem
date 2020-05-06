@@ -2,7 +2,7 @@ import React from "react";
 import Login from "../Components/Login";
 const Register = (props) => {
   
-console.log(props.onChange);
+console.log(props.LonClick);
   return (
     <div className="register">
       <div>

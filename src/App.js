@@ -57,7 +57,10 @@ function App() {
   };
 
   const loginHandler = () => {
-    
+    console.log(users[0].id, tempLoginUser);
+    const user = users.filter(tempUser => tempUser.id === Number(tempLoginUser.uname) && 
+      tempUser.password === tempLoginUser.Lname);
+    console.log(user);
   };
 
   useEffect(() => {
@@ -85,6 +88,7 @@ function App() {
           heading="Please login to continue"
           info="This is Login Page"
           RonClick={onClickHandaler}
+          LonClick = {loginHandler}
         />
       ) : (
         <Registration

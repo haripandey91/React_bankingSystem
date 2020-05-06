@@ -3,7 +3,7 @@ import Input from "./Input"
 import Button from "./Button"
 import "../styles/login.scss"
 export default function Login(props) {
-    console.log(props.RonClick)
+    console.log(props.LonClick)
     
     return (
         <div className="login"> 
@@ -16,7 +16,7 @@ export default function Login(props) {
             </span> 
             <span className="buttons">           
             <Button className={props.RclassName} value = {props.Rvalue} onClick={(e)=>props.RonClick(e)}/>
-            <Button className={props.LclassName} value = {props.Lvalue} onClick={props.LonCLick}/>
+            <Button className={props.LclassName} value = {props.Lvalue} onClick={props.LonClick}/>
             </span>
         </div>
     )
