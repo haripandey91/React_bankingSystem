@@ -1,7 +1,7 @@
 import React from 'react'
 import "../styles/button.scss"
 const Button = (props) => {
-    console.log(props);
+   // console.log(props);
     
     return (
         <div className="custom-button">
