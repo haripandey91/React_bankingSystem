@@ -4,12 +4,14 @@ import Register from "./pages/Register";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import Registration from "./Components/Registration";
+import LoggedIn from "./Components/UserLoggedIn";
 
 function App() {
   const [sregister, setsRegister] = useState();
   const [users, setUsers] = useState([]);
   const [tempUser, setTempUser] = useState();
   const [tempLoginUser, setTempLoginUser] = useState();
+  const [userVerified, setUserVerified] = useState(false);
 
   const onClickHandaler = (e) => {
     setsRegister(e.target.value);
@@ -77,6 +79,7 @@ function App() {
     <div>
       <Header heading="Buutti Bank" />
       {sregister === "Login" ? (
+        <div>
         <Register
           Uname="uname"
           Pname="Lname"
@@ -92,6 +95,15 @@ function App() {
           RonClick={onClickHandaler}
           LonClick={loginHandler}
         />
+        <LoggedIn 
+          depositClassName="btn btn-info"
+          withdrawClassName="btn btn-danger"
+          onClick={onClickHandaler}
+          depositValue= "Deposit"
+          withdrawValue = "Withdraw"
+
+
+        /></div>
       ) : (
         <Registration
           Uname="Uname"
