@@ -1,7 +1,8 @@
 import React from "react";
 import Login from "../Components/Login";
 const Register = (props) => {
-  console.log(props.RonClick)
+  
+console.log(props.onChange);
   return (
     <div className="register">
       <div>
@@ -15,6 +16,7 @@ const Register = (props) => {
         onChange={props.onChange}
         RclassName={props.RclassName}
         LclassName={props.LclassName}
+        InitialAmount={props.InitialAmount}
         RonClick={props.RonClick}
         LonClick={props.LonClick}
         Rvalue={props.Rvalue}
