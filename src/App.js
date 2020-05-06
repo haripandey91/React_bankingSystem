@@ -28,7 +28,6 @@ function App() {
     const value = e.target.value;
     console.log(users, "before");
     setTempUser({ ...tempUser, [name]: value });
-    //create_id();
     console.log(tempUser);
   };
 
@@ -58,8 +57,11 @@ function App() {
 
   const loginHandler = () => {
     console.log(users[0].id, tempLoginUser);
-    const user = users.filter(tempUser => tempUser.id === Number(tempLoginUser.uname) && 
-      tempUser.password === tempLoginUser.Lname);
+    const user = users.filter(
+      (tempUser) =>
+        tempUser.id === Number(tempLoginUser.uname) &&
+        tempUser.password === tempLoginUser.Lname
+    );
     console.log(user);
   };
 
@@ -88,7 +90,7 @@ function App() {
           heading="Please login to continue"
           info="This is Login Page"
           RonClick={onClickHandaler}
-          LonClick = {loginHandler}
+          LonClick={loginHandler}
         />
       ) : (
         <Registration
