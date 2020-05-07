@@ -12,12 +12,41 @@ function App() {
   const [tempUser, setTempUser] = useState();
   const [tempLoginUser, setTempLoginUser] = useState();
   const [userVerified, setUserVerified] = useState(false);
-  const [tempDeposit, setTempDeposit] = useState();
+  const [tempDeposit, setTempDeposit] = useState([]);
   const [loggedInUser, setLoggedInUser] = useState();
-  const [depositClicked, setDepositClicked] = useState();
+  const [depositClicked, setDepositClicked] = useState("withdraw");
+  const [updateBalance, setUpdateBalance] = useState();
+
+
+  const onSubmitHandler = () => {
+    console.log(loggedInUser)
+    let currentUserBalance = loggedInUser.balance;
+    console.log(currentUserBalance, tempDeposit.AmountValue );
+    {depositClicked === "deposit" ? currentUserBalance = currentUserBalance + tempDeposit[0].balance : currentUserBalance = currentUserBalance - tempDeposit[0].balance; 
+    console.log(currentUserBalance)}
+    console.log(loggedInUser);
+    setLoggedInUser({
+      id: loggedInUser.id,
+      name: loggedInUser.name,
+      balance: currentUserBalance,
+    });
+    setUsers([
+      ...users,
+      {
+        name: loggedInUser.name,
+        balance: currentUserBalance,
+        id: loggedInUser.id,
+      },
+    ])
+    return currentUserBalance;
+  };
 
   const depositClick = () => {
     setDepositClicked("deposit");
+  };
+
+  const withdrawClick = () => {
+    setDepositClicked("withdraw");
   };
 
   const loginHandler = () => {
@@ -70,20 +99,6 @@ function App() {
     console.log(users);
   };
 
-  const depositInputHandler = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setTempDeposit({ ...tempDeposit, [name]: value });
-    console.log(tempDeposit);
-  };
-
-  const onSubmitHandler = () => {
-    console.log(tempLoginUser);
-    const currentUser = users.filter((user) => user.id === tempUser.id);
-    console.log(currentUser);
-    console.log(tempDeposit.amount);
-  };
-
   const onLoginInputHandler = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -92,12 +107,17 @@ function App() {
     //  console.log(tempLoginUser);
   };
 
-  useEffect(() => {
-    setsRegister("Login");
-  }, []);
+  const depositInputHandler = (e) => {
+    const AmountName = e.target.name;
+    const AmountValue = e.target.value;
+    console.log(AmountName, AmountValue);
+    setTempDeposit([{...tempDeposit, AmountName:AmountName ,balance: Number(AmountValue) }]);
+    console.log(tempDeposit,'I am the tempDeposit');
+  };
+  
 
   useEffect(() => {
-    setDepositClicked("withdraw");
+    setsRegister("Login");
   }, []);
 
   const setBackPage = (e) => {
@@ -157,9 +177,10 @@ function App() {
           submitValue="Submit"
           depositValue="Deposit"
           withdrawValue="Withdraw"
-          AmountName="amount"
+          AmountName={tempDeposit.name}
+          AmountValue={tempDeposit.AmountValue}
           depositOnClick={depositClick}
-          //withdrawOnClick = {}
+          withdrawOnClick={withdrawClick}
           funds={loggedInUser.balance + " €"}
           messageAfterLogin={
             depositClicked === "withdraw"
