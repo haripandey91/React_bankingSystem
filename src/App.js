@@ -12,6 +12,11 @@ function App() {
   const [tempUser, setTempUser] = useState();
   const [tempLoginUser, setTempLoginUser] = useState();
   const [userVerified, setUserVerified] = useState(false);
+  const [tempDeposit, setTempDeposit] = useState();
+  const [loggedInUser, setLoggedInUser] = useState();
+
+  /* let loggedInUserId;
+  let loggedInUserName; */
 
   const loginHandler = () => {
     const user = users.filter(
@@ -19,11 +24,13 @@ function App() {
         tempUser.id === Number(tempLoginUser.uname) &&
         tempUser.password === tempLoginUser.Lname
     );
-    {
-      user.length > 0  && user.length < 2
+      user.length === 1
         ? setUserVerified(true)
         : console.log("something went wrong");
-    }
+    
+
+     setLoggedInUser({id:user[0].id, name:user[0].name, balance:user[0].balance})
+    // console.log(loggedInUserId, loggedInUserName);
     //console.log(setUserVerified.length);
   };
 
@@ -63,12 +70,26 @@ function App() {
     console.log(users);
   };
 
+  const depositInputHandler = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setTempDeposit({ ...tempDeposit, [name]: value });
+    console.log(tempDeposit);
+  };
+
+  const onSubmitHandler = () => {
+    console.log(tempLoginUser);
+    const currentUser = users.filter((user) => user.id === tempUser.id);
+    console.log(currentUser);
+    console.log(tempDeposit.amount);
+  };
+
   const onLoginInputHandler = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     console.log(users, "before");
     setTempLoginUser({ ...tempLoginUser, [name]: value });
-    console.log(tempLoginUser);
+    //  console.log(tempLoginUser);
   };
 
   useEffect(() => {
@@ -124,12 +145,22 @@ function App() {
         <LoggedIn
           depositClassName="btn btn-info"
           withdrawClassName="btn btn-danger"
-          onClick={onClickHandaler}
+          submitClassName="btn btn-success"
+          // onClick={depositInputHandler}
+          onChange={depositInputHandler}
+          onClick={onSubmitHandler}
+          loggedInUserName= {loggedInUser.name}
+          submitValue="Submit"
           depositValue="Deposit"
           withdrawValue="Withdraw"
+          AmountName="amount"
+          depositOnClick={depositInputHandler}
+          //withdrawOnClick = {}
+          funds={loggedInUser.balance +'€'}
+          messageAfterLogin="How much you would like to withdraw??" //put a condition for two different messages. one with withdraw and another with deposit
         />
       ) : (
-        <p>This is the false div</p>
+        console.log("behind the login button")
       )}
 
       <Footer />
