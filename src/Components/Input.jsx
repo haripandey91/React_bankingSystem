@@ -1,8 +1,6 @@
 import React from "react";
 import "../styles/input.scss"
 const Input = (props) => {
-  console.log(props.value);
-  
   return (
     <div className="input">
       <span className="input-label">

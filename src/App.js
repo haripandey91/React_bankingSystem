@@ -27,8 +27,6 @@ function App() {
       user.length === 1
         ? setUserVerified(true)
         : console.log("something went wrong");
-    
-
      setLoggedInUser({id:user[0].id, name:user[0].name, balance:user[0].balance})
     // console.log(loggedInUserId, loggedInUserName);
     //console.log(setUserVerified.length);
@@ -61,7 +59,7 @@ function App() {
           {
             name: tempUser.Uname,
             password: tempUser.Pname,
-            balance: tempUser.InitialAmount,
+            balance: Number(tempUser.InitialAmount),
             id: create_id(),
           },
         ])
@@ -110,6 +108,7 @@ function App() {
             Pname="Lname"
             UserId="userId"
             PasswordId="passwordId"
+            Usertype="password"
             onChange={onLoginInputHandler}
             RclassName="btn btn-info"
             LclassName="btn btn-success"
@@ -128,6 +127,7 @@ function App() {
           InitialAmount="InitialAmount"
           RUserId="rUserId"
           RPasswordId="rPasswordId"
+          Ptype="password"
           onChange={onChangeHandaler}
           InitialAmountId="initialAmountId"
           RegistrationclassName="btn btn-success"
@@ -160,7 +160,7 @@ function App() {
           messageAfterLogin="How much you would like to withdraw??" //put a condition for two different messages. one with withdraw and another with deposit
         />
       ) : (
-        console.log("behind the login button")
+        console.log()
       )}
 
       <Footer />
