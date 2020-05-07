@@ -5,8 +5,43 @@
     margin-left: 15%;
     margin-top: 20px;
 
+    p {
+        text-align: right;
+        color: white;
+        padding: 10px;
+        background-color: rgb(38, 8, 109);
+
+    }
+
+    .totalFundsDiv{
+        padding-left: 30px;
+        padding-bottom: 10px;
+    }
+
+    .WithdrawMessage{
+        margin-left: 22%;
+        font-size: 17px;
+    }
+
+ 
+    .totalFunds{
+        text-decoration: underline;
+        text-shadow: hue(rgb(6, 2, 19));
+        background-color:white;
+    }
 }
 
-.totalFunds{
+   .depositClassName{
+        margin-left: 70%;
+    }
+
+    .depositClassName:active{color:black}
     
-}
+    .submitClassName{
+        margin-left: 53%;
+        background-color: #0a1979;
+    }
+
+    .withdrawClassName{
+
+    }

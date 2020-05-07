@@ -14,9 +14,11 @@ function App() {
   const [userVerified, setUserVerified] = useState(false);
   const [tempDeposit, setTempDeposit] = useState();
   const [loggedInUser, setLoggedInUser] = useState();
+  const [depositClicked, setDepositClicked] = useState();
 
-  /* let loggedInUserId;
-  let loggedInUserName; */
+  const depositClick = () => {
+    setDepositClicked("deposit");
+  };
 
   const loginHandler = () => {
     const user = users.filter(
@@ -24,12 +26,14 @@ function App() {
         tempUser.id === Number(tempLoginUser.uname) &&
         tempUser.password === tempLoginUser.Lname
     );
-      user.length === 1
-        ? setUserVerified(true)
-        : console.log("something went wrong");
-     setLoggedInUser({id:user[0].id, name:user[0].name, balance:user[0].balance})
-    // console.log(loggedInUserId, loggedInUserName);
-    //console.log(setUserVerified.length);
+    user.length === 1
+      ? setUserVerified(true)
+      : console.log("something went wrong");
+    setLoggedInUser({
+      id: user[0].id,
+      name: user[0].name,
+      balance: user[0].balance,
+    });
   };
 
   const onClickHandaler = (e) => {
@@ -47,9 +51,7 @@ function App() {
   const onChangeHandaler = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    console.log(users, "before");
     setTempUser({ ...tempUser, [name]: value });
-    console.log(tempUser);
   };
 
   const onSaveHandler = () => {
@@ -85,13 +87,17 @@ function App() {
   const onLoginInputHandler = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    console.log(users, "before");
+    console.log(users);
     setTempLoginUser({ ...tempLoginUser, [name]: value });
     //  console.log(tempLoginUser);
   };
 
   useEffect(() => {
     setsRegister("Login");
+  }, []);
+
+  useEffect(() => {
+    setDepositClicked("withdraw");
   }, []);
 
   const setBackPage = (e) => {
@@ -108,14 +114,13 @@ function App() {
             Pname="Lname"
             UserId="userId"
             PasswordId="passwordId"
-            Usertype="password"
+            type="password"
             onChange={onLoginInputHandler}
             RclassName="btn btn-info"
             LclassName="btn btn-success"
             Rvalue="Register"
             Lvalue="Login"
             heading="Please login to continue"
-            info="This is Login Page"
             RonClick={onClickHandaler}
             LonClick={loginHandler}
           />
@@ -135,7 +140,6 @@ function App() {
           Registrationvalue="Save"
           BackButtonvalue="Back"
           heading="Please register to continue"
-          info="This is Registration Page"
           SaveonClick={onSaveHandler}
           BackonClick={setBackPage}
         />
@@ -143,21 +147,25 @@ function App() {
 
       {userVerified === true ? (
         <LoggedIn
-          depositClassName="btn btn-info"
-          withdrawClassName="btn btn-danger"
-          submitClassName="btn btn-success"
+          depositClassName="btn btn-info depositClassName"
+          withdrawClassName="btn btn-danger withdrawClassName"
+          submitClassName="btn btn-success submitClassName"
           // onClick={depositInputHandler}
           onChange={depositInputHandler}
           onClick={onSubmitHandler}
-          loggedInUserName= {loggedInUser.name}
+          loggedInUserName={loggedInUser.name}
           submitValue="Submit"
           depositValue="Deposit"
           withdrawValue="Withdraw"
           AmountName="amount"
-          depositOnClick={depositInputHandler}
+          depositOnClick={depositClick}
           //withdrawOnClick = {}
-          funds={loggedInUser.balance +'€'}
-          messageAfterLogin="How much you would like to withdraw??" //put a condition for two different messages. one with withdraw and another with deposit
+          funds={loggedInUser.balance + " €"}
+          messageAfterLogin={
+            depositClicked === "withdraw"
+              ? "How much you would like to withdraw?"
+              : "How much you would like to deposit?"
+          }
         />
       ) : (
         console.log()
