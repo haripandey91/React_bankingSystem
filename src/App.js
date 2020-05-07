@@ -13,6 +13,20 @@ function App() {
   const [tempLoginUser, setTempLoginUser] = useState();
   const [userVerified, setUserVerified] = useState(false);
 
+  const loginHandler = () => {
+    const user = users.filter(
+      (tempUser) =>
+        tempUser.id === Number(tempLoginUser.uname) &&
+        tempUser.password === tempLoginUser.Lname
+    );
+    {
+      user.length > 0  && user.length < 2
+        ? setUserVerified(true)
+        : console.log("something went wrong");
+    }
+    //console.log(setUserVerified.length);
+  };
+
   const onClickHandaler = (e) => {
     setsRegister(e.target.value);
   };
@@ -57,16 +71,6 @@ function App() {
     console.log(tempLoginUser);
   };
 
-  const loginHandler = () => {
-    console.log(users[0].id, tempLoginUser);
-    const user = users.filter(
-      (tempUser) =>
-        tempUser.id === Number(tempLoginUser.uname) &&
-        tempUser.password === tempLoginUser.Lname
-    );
-    console.log(user);
-  };
-
   useEffect(() => {
     setsRegister("Login");
   }, []);
@@ -80,30 +84,22 @@ function App() {
       <Header heading="Buutti Bank" />
       {sregister === "Login" ? (
         <div>
-        <Register
-          Uname="uname"
-          Pname="Lname"
-          UserId="userId"
-          PasswordId="passwordId"
-          onChange={onLoginInputHandler}
-          RclassName="btn btn-info"
-          LclassName="btn btn-success"
-          Rvalue="Register"
-          Lvalue="Login"
-          heading="Please login to continue"
-          info="This is Login Page"
-          RonClick={onClickHandaler}
-          LonClick={loginHandler}
-        />
-        <LoggedIn 
-          depositClassName="btn btn-info"
-          withdrawClassName="btn btn-danger"
-          onClick={onClickHandaler}
-          depositValue= "Deposit"
-          withdrawValue = "Withdraw"
-
-
-        /></div>
+          <Register
+            Uname="uname"
+            Pname="Lname"
+            UserId="userId"
+            PasswordId="passwordId"
+            onChange={onLoginInputHandler}
+            RclassName="btn btn-info"
+            LclassName="btn btn-success"
+            Rvalue="Register"
+            Lvalue="Login"
+            heading="Please login to continue"
+            info="This is Login Page"
+            RonClick={onClickHandaler}
+            LonClick={loginHandler}
+          />
+        </div>
       ) : (
         <Registration
           Uname="Uname"
@@ -123,6 +119,19 @@ function App() {
           BackonClick={setBackPage}
         />
       )}
+
+      {userVerified === true ? (
+        <LoggedIn
+          depositClassName="btn btn-info"
+          withdrawClassName="btn btn-danger"
+          onClick={onClickHandaler}
+          depositValue="Deposit"
+          withdrawValue="Withdraw"
+        />
+      ) : (
+        <p>This is the false div</p>
+      )}
+
       <Footer />
     </div>
   );
