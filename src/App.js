@@ -1,47 +1,45 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Register from "./pages/Register";
+import FirstPage from './pages/FirstPage'
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import Registration from "./Components/Registration";
 import LoggedIn from "./Components/UserLoggedIn";
-import data from './Components/users.json'
+import data from "./Components/users.json";
 
 function App() {
   const [sregister, setsRegister] = useState();
-  const [users, setUsers] = useState(data);
+  const [users, setUsers] = useState(data); //DATABASE
   const [tempUser, setTempUser] = useState();
   const [tempLoginUser, setTempLoginUser] = useState();
   const [userVerified, setUserVerified] = useState(false);
   const [tempDeposit, setTempDeposit] = useState([]);
-  const [loggedInUser, setLoggedInUser] = useState();
-  const [depositClicked, setDepositClicked] = useState("withdraw");
+  const [loggedInUser, setLoggedInUser] = useState([]);
+  const [depositClicked, setDepositClicked] = useState("deposit");
   const [updateBalance, setUpdateBalance] = useState();
   /* const [updateUser, setUpdateUser] = useState(); */
 
-  const onSubmitHandler = () => {
-  
-    let currentUserBalance = loggedInUser.balance;
-    console.log(currentUserBalance, tempDeposit.AmountValue);
+  const onSubmitHandler = (e) => {
+    let currentUserBalance = loggedInUser;
+    let newBalance;
     depositClicked === "deposit"
-      ? (currentUserBalance = currentUserBalance + tempDeposit[0].balance)
-      : (currentUserBalance = currentUserBalance - tempDeposit[0].balance);
+      ? (newBalance = currentUserBalance.balance + tempDeposit[0].balance)
+      : (newBalance = currentUserBalance.balance - tempDeposit[0].balance);
 
-      setLoggedInUser({
+    //dataChange in Loginuser state
+    setLoggedInUser({
       id: loggedInUser.id,
       name: loggedInUser.name,
-      balance: currentUserBalance,
-      password: loggedInUser.password
+      balance: newBalance,
+      password: loggedInUser.password,
     });
-    
 
     let i = users.findIndex((item) => item.id === loggedInUser.id);
-    console.log(i);
     let temp = [...users];
-    temp[i] = loggedInUser;
+    temp[i].balance = newBalance;
+    //dataChange in User state(main collection of data)
     setUsers(temp);
-
-    return currentUserBalance;
   };
 
   const depositClick = () => {
@@ -69,6 +67,7 @@ function App() {
     });
     console.log(loggedInUser);
   };
+
   const onClickHandaler = (e) => {
     setsRegister(e.target.value);
   };
@@ -85,6 +84,7 @@ function App() {
     const name = e.target.name;
     const value = e.target.value;
     setTempUser({ ...tempUser, [name]: value });
+    console.log(tempUser);
   };
 
   const onSaveHandler = () => {
@@ -131,46 +131,21 @@ function App() {
 
   return (
     <div>
+      {/* HEADER */}
       <Header heading="Buutti Bank" />
-      {sregister === "Login" ? (
-        <div>
-          <Register
-            Uname="uname"
-            Pname="Lname"
-            UserId="userId"
-            PasswordId="passwordId"
-            type="password"
-            onChange={onLoginInputHandler}
-            RclassName="btn btn-info"
-            LclassName="btn btn-success"
-            Rvalue="Register"
-            Lvalue="Login"
-            heading="Please login to continue"
-            RonClick={onClickHandaler}
-            LonClick={loginHandler}
-          />
-        </div>
-      ) : (
-        <Registration
-          Uname="Uname"
-          Pname="Pname"
-          InitialAmount="InitialAmount"
-          RUserId="rUserId"
-          RPasswordId="rPasswordId"
-          Ptype="password"
-          onChange={onChangeHandaler}
-          InitialAmountId="initialAmountId"
-          RegistrationclassName="btn btn-success"
-          BackclassName="btn btn-danger"
-          Registrationvalue="Save"
-          BackButtonvalue="Back"
-          heading="Please register to continue"
-          SaveonClick={onSaveHandler}
-          BackonClick={setBackPage}
+      {/*END OF HEADER */}
+      {/* REISTER */}
+      {!userVerified ? (
+        <FirstPage
+        sregister={sregister}
+        onLoginInputHandler = {onLoginInputHandler}
+        onClickHandaler = {onClickHandaler}
+        loginHandler = {loginHandler}
+        onChangeHandaler={onChangeHandaler}
+        onSaveHandler={onSaveHandler}
+        setBackPage={setBackPage}
         />
-      )}
-
-      {userVerified === true ? (
+        ) : (
         <LoggedIn
           depositClassName="btn btn-info depositClassName"
           withdrawClassName="btn btn-danger withdrawClassName"
@@ -186,16 +161,16 @@ function App() {
           AmountValue={tempDeposit.AmountValue}
           depositOnClick={depositClick}
           withdrawOnClick={withdrawClick}
-          funds={loggedInUser.balance + " €"}
+          funds={loggedInUser.balance + ".00 €"}
           messageAfterLogin={
             depositClicked === "withdraw"
               ? "How much you would like to withdraw?"
               : "How much you would like to deposit?"
           }
         />
-      ) : (
-        console.log()
       )}
+      }{/* End of Main page */}
+      {/* sTART ODF fOTER */}
       <Footer />
     </div>
   );
