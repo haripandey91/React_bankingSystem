@@ -5,10 +5,11 @@ import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import Registration from "./Components/Registration";
 import LoggedIn from "./Components/UserLoggedIn";
+import data from './Components/users.json'
 
 function App() {
   const [sregister, setsRegister] = useState();
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState(data);
   const [tempUser, setTempUser] = useState();
   const [tempLoginUser, setTempLoginUser] = useState();
   const [userVerified, setUserVerified] = useState(false);
