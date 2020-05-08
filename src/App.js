@@ -16,28 +16,30 @@ function App() {
   const [loggedInUser, setLoggedInUser] = useState();
   const [depositClicked, setDepositClicked] = useState("withdraw");
   const [updateBalance, setUpdateBalance] = useState();
-
+  /* const [updateUser, setUpdateUser] = useState(); */
 
   const onSubmitHandler = () => {
-    console.log(loggedInUser)
+  
     let currentUserBalance = loggedInUser.balance;
-    console.log(currentUserBalance, tempDeposit.AmountValue );
-    {depositClicked === "deposit" ? currentUserBalance = currentUserBalance + tempDeposit[0].balance : currentUserBalance = currentUserBalance - tempDeposit[0].balance; 
-    console.log(currentUserBalance)}
-    console.log(loggedInUser);
-    setLoggedInUser({
+    console.log(currentUserBalance, tempDeposit.AmountValue);
+    depositClicked === "deposit"
+      ? (currentUserBalance = currentUserBalance + tempDeposit[0].balance)
+      : (currentUserBalance = currentUserBalance - tempDeposit[0].balance);
+
+      setLoggedInUser({
       id: loggedInUser.id,
       name: loggedInUser.name,
       balance: currentUserBalance,
+      password: loggedInUser.password
     });
-    setUsers([
-      ...users,
-      {
-        name: loggedInUser.name,
-        balance: currentUserBalance,
-        id: loggedInUser.id,
-      },
-    ])
+    
+
+    let i = users.findIndex((item) => item.id === loggedInUser.id);
+    console.log(i);
+    let temp = [...users];
+    temp[i] = loggedInUser;
+    setUsers(temp);
+
     return currentUserBalance;
   };
 
@@ -62,9 +64,10 @@ function App() {
       id: user[0].id,
       name: user[0].name,
       balance: user[0].balance,
+      password: user[0].password,
     });
+    console.log(loggedInUser);
   };
-
   const onClickHandaler = (e) => {
     setsRegister(e.target.value);
   };
@@ -111,10 +114,11 @@ function App() {
     const AmountName = e.target.name;
     const AmountValue = e.target.value;
     console.log(AmountName, AmountValue);
-    setTempDeposit([{...tempDeposit, AmountName:AmountName ,balance: Number(AmountValue) }]);
-    console.log(tempDeposit,'I am the tempDeposit');
+    setTempDeposit([
+      { ...tempDeposit, AmountName: AmountName, balance: Number(AmountValue) },
+    ]);
+    console.log(tempDeposit, "I am the tempDeposit");
   };
-  
 
   useEffect(() => {
     setsRegister("Login");
@@ -191,7 +195,6 @@ function App() {
       ) : (
         console.log()
       )}
-
       <Footer />
     </div>
   );
