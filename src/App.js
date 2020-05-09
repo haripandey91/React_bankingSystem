@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Register from "./pages/Register";
-import FirstPage from './pages/FirstPage'
+import FirstPage from "./pages/FirstPage";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import Registration from "./Components/Registration";
@@ -131,26 +131,22 @@ function App() {
 
   return (
     <div>
-      {/* HEADER */}
       <Header heading="Buutti Bank" />
-      {/*END OF HEADER */}
-      {/* REISTER */}
       {!userVerified ? (
         <FirstPage
-        sregister={sregister}
-        onLoginInputHandler = {onLoginInputHandler}
-        onClickHandaler = {onClickHandaler}
-        loginHandler = {loginHandler}
-        onChangeHandaler={onChangeHandaler}
-        onSaveHandler={onSaveHandler}
-        setBackPage={setBackPage}
+          sregister={sregister}
+          onLoginInputHandler={onLoginInputHandler}
+          onClickHandaler={onClickHandaler}
+          loginHandler={loginHandler}
+          onChangeHandaler={onChangeHandaler}
+          onSaveHandler={onSaveHandler}
+          setBackPage={setBackPage}
         />
-        ) : (
+      ) : (
         <LoggedIn
           depositClassName="btn btn-info depositClassName"
           withdrawClassName="btn btn-danger withdrawClassName"
           submitClassName="btn btn-success submitClassName"
-          // onClick={depositInputHandler}
           onChange={depositInputHandler}
           onClick={onSubmitHandler}
           loggedInUserName={loggedInUser.name}
@@ -169,8 +165,7 @@ function App() {
           }
         />
       )}
-      }{/* End of Main page */}
-      {/* sTART ODF fOTER */}
+      }
       <Footer />
     </div>
   );
