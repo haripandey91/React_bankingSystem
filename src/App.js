@@ -7,6 +7,7 @@ import Footer from "./Components/Footer";
 import Registration from "./Components/Registration";
 import LoggedIn from "./Components/UserLoggedIn";
 import data from "./Components/users.json";
+import './styles/app.scss'
 
 
 function App() {
@@ -163,7 +164,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="MainAppDiv">
       <Header heading="Buutti Bank" />
       {!userVerified ? (
         <FirstPage
