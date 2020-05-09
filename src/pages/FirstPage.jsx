@@ -1,8 +1,10 @@
 import React from "react";
 import Register from "./Register";
 import Registration from "../Components/Registration";
+import Login from '../Components/Login'
 
 const FirstPage = (props) => {
+  console.log(props.validityMessage)
     return (
   <div>
     {props.sregister === "Login" ? (
@@ -21,6 +23,7 @@ const FirstPage = (props) => {
           heading="Please login to continue"
           RonClick={props.onClickHandaler}
           LonClick={props.loginHandler}
+          validityMessage= {props.validityMessage}
         />
       </div>
     ) : (

@@ -1,12 +1,12 @@
 .loggedIn{
     background-color: cornflowerblue;
-    height: 40vh;
+    height: 60vh;
     width: 70vw;
     margin-left: 15%;
     margin-top: 20px;
 
     p {
-        text-align: right;
+        text-align: center;
         color: white;
         padding: 10px;
         background-color: rgb(38, 8, 109);
@@ -15,30 +15,43 @@
 
     .totalFundsDiv{
         padding-left: 30px;
-        padding-bottom: 10px;
+        padding-bottom: 5px;
     }
 
     .WithdrawMessage{
         margin-left: 22%;
         font-size: 17px;
+        margin-top: 10px;
+        
     }
 
  
     .totalFunds{
-        text-decoration: underline;
+        text-decoration:wavy;
         text-shadow: hue(rgb(6, 2, 19));
-        background-color:white;
+        background-color:rgb(59, 238, 104);
     }
 }
 
-   .depositClassName{
-        margin-left: 70%;
-        background-color:#778284 ;
+   .transferClassName{
+        margin-left: 50%;
     }
 
-    .depositClassName:active{color:rgb(233, 15, 15)}
+    .transferClassNameForButton, .withdrawClassName,.depositClassNameForButton{
+        background-color:#4f5353 ;
+    }
+
     
     .submitClassName{
         margin-left: 53%;
         background-color: #0a1979;
+    }
+
+    .logOutClassName{
+        margin-left: 85%;
+        margin-top: -14%;
+    }
+
+    .inputClassName{
+    
     }

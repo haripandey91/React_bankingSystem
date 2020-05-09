@@ -20,6 +20,7 @@ const Register = (props) => {
         Rvalue={props.Rvalue}
         Lvalue={props.Lvalue}
         heading={props.heading}
+        validityMessage = {props.validityMessage}
       />
     </div>
   );

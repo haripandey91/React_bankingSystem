@@ -10,13 +10,15 @@ import data from "./Components/users.json";
 
 function App() {
   const [sregister, setsRegister] = useState();
-  const [users, setUsers] = useState(data); //DATABASE
+  const [users, setUsers] = useState(data);
   const [tempUser, setTempUser] = useState();
   const [tempLoginUser, setTempLoginUser] = useState();
   const [userVerified, setUserVerified] = useState(false);
   const [tempDeposit, setTempDeposit] = useState([]);
   const [loggedInUser, setLoggedInUser] = useState([]);
   const [depositClicked, setDepositClicked] = useState("deposit");
+  const [validityMessage, setValidityMessage]= useState("");
+  const [transferClick, setTransferClick] = useState(); 
 
   const onSubmitHandler = (e) => {
     let currentUserBalance = loggedInUser;
@@ -48,21 +50,31 @@ function App() {
     setDepositClicked("withdraw");
   };
 
+  const transferClicked = () => {
+    setTransferClick("transfer");
+  };
+
   const loginHandler = () => {
+    if(tempLoginUser){console.log('hello')}
     const user = users.filter(
       (tempUser) =>
         tempUser.id === Number(tempLoginUser.uname) &&
         tempUser.password === tempLoginUser.Lname
     );
-    user.length === 1
-      ? setUserVerified(true)
-      : console.log("something went wrong");
-    setLoggedInUser({
+
+    if(user.length === 1){
+      setUserVerified(true)
+      setLoggedInUser({
       id: user[0].id,
       name: user[0].name,
       balance: user[0].balance,
       password: user[0].password,
     });
+    }else{
+      setValidityMessage("!!  Please enter the valid information !!")
+      console.log(validityMessage)
+    }
+    
     console.log(loggedInUser);
   };
 
@@ -82,7 +94,6 @@ function App() {
     const name = e.target.name;
     const value = e.target.value;
     setTempUser({ ...tempUser, [name]: value });
-    console.log(tempUser);
   };
 
   const onSaveHandler = () => {
@@ -106,7 +117,6 @@ function App() {
     const value = e.target.value;
     console.log(users);
     setTempLoginUser({ ...tempLoginUser, [name]: value });
-    //  console.log(tempLoginUser);
   };
 
   const depositInputHandler = (e) => {
@@ -116,7 +126,6 @@ function App() {
     setTempDeposit([
       { ...tempDeposit, AmountName: AmountName, balance: Number(AmountValue) },
     ]);
-    console.log(tempDeposit, "I am the tempDeposit");
   };
 
   useEffect(() => {
@@ -126,6 +135,11 @@ function App() {
   const setBackPage = (e) => {
     setsRegister("Login");
   };
+
+  const logOutClick = (e) =>{
+    setUserVerified(false)
+    console.log('You are  logged Out')
+  }
 
   return (
     <div>
@@ -139,11 +153,12 @@ function App() {
           onChangeHandaler={onChangeHandaler}
           onSaveHandler={onSaveHandler}
           setBackPage={setBackPage}
+          validityMessage= {validityMessage}
         />
       ) : (
         <LoggedIn
-          depositClassName="btn btn-info depositClassName"
-          withdrawClassName="btn btn-danger withdrawClassName"
+          depositClassName={depositClicked === "deposit" ? "btn btn-danger depositClassName" : "btn depositClassName depositClassNameForButton"}
+          withdrawClassName={depositClicked === "withdraw" ? "btn btn-danger" :" btn withdrawClassName"}
           submitClassName="btn btn-success submitClassName"
           onChange={depositInputHandler}
           onClick={onSubmitHandler}
@@ -155,12 +170,19 @@ function App() {
           AmountValue={tempDeposit.AmountValue}
           depositOnClick={depositClick}
           withdrawOnClick={withdrawClick}
-          funds={loggedInUser.balance + ".00 €"}
+          logOutClick={logOutClick}
+          logOutClassName="btn btn-dark logOutClassName"
+          logoutValue="Log Out"
+          transferClassName={transferClick === "transfer" ? "btn btn-danger transferClassName" : "btn transferClassName transferClassNameForButton"}
+          transferValue="Transfer Funds"
+          transferOnClick={transferClicked}
+          funds={loggedInUser.balance + " € " + " "}
           messageAfterLogin={
             depositClicked === "withdraw"
-              ? "How much you would like to withdraw?"
-              : "How much you would like to deposit?"
+              ? "How much you would like to WITHDRAW?"
+              : "How much you would like to DEPOSIT?"
           }
+          
         />
       )}
       }
