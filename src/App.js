@@ -17,8 +17,6 @@ function App() {
   const [tempDeposit, setTempDeposit] = useState([]);
   const [loggedInUser, setLoggedInUser] = useState([]);
   const [depositClicked, setDepositClicked] = useState("deposit");
-  const [updateBalance, setUpdateBalance] = useState();
-  /* const [updateUser, setUpdateUser] = useState(); */
 
   const onSubmitHandler = (e) => {
     let currentUserBalance = loggedInUser;
