@@ -8,6 +8,7 @@ export default function Login(props) {
       <span className="heading">
         <h5>{props.heading}</h5>
       </span>
+      <p className="registerError">{props.registerError}</p>
       <span className="inputs">
         Full name:{" "}
         <Input

@@ -8,17 +8,20 @@ import Registration from "./Components/Registration";
 import LoggedIn from "./Components/UserLoggedIn";
 import data from "./Components/users.json";
 
+
 function App() {
   const [sregister, setsRegister] = useState();
   const [users, setUsers] = useState(data);
   const [tempUser, setTempUser] = useState();
-  const [tempLoginUser, setTempLoginUser] = useState();
+  const [tempLoginUser, setTempLoginUser] = useState("");
   const [userVerified, setUserVerified] = useState(false);
   const [tempDeposit, setTempDeposit] = useState([]);
   const [loggedInUser, setLoggedInUser] = useState([]);
   const [depositClicked, setDepositClicked] = useState("deposit");
   const [validityMessage, setValidityMessage]= useState("");
   const [transferClick, setTransferClick] = useState(); 
+  const [registrationSuccess, setRegistrationSuccess] = useState();
+  const [registerError, setRegisterError] = useState();
 
   const onSubmitHandler = (e) => {
     let currentUserBalance = loggedInUser;
@@ -40,6 +43,7 @@ function App() {
     temp[i].balance = newBalance;
     //dataChange in User state(main collection of data)
     setUsers(temp);
+
   };
 
   const depositClick = () => {
@@ -55,13 +59,12 @@ function App() {
   };
 
   const loginHandler = () => {
-    if(tempLoginUser){console.log('hello')}
     const user = users.filter(
       (tempUser) =>
         tempUser.id === Number(tempLoginUser.uname) &&
         tempUser.password === tempLoginUser.Lname
     );
-
+    setRegistrationSuccess("");
     if(user.length === 1){
       setUserVerified(true)
       setLoggedInUser({
@@ -72,7 +75,6 @@ function App() {
     });
     }else{
       setValidityMessage("!!  Please enter the valid information !!")
-      console.log(validityMessage)
     }
     
     console.log(loggedInUser);
@@ -97,8 +99,10 @@ function App() {
   };
 
   const onSaveHandler = () => {
-    tempUser
-      ? setUsers([
+    if (!(tempUser)){
+      setRegisterError("!! Please fill the information first !!") 
+    } else {
+      setUsers([
           ...users,
           {
             name: tempUser.Uname,
@@ -107,8 +111,13 @@ function App() {
             id: create_id(),
           },
         ])
-      : console.log("Please fill the form first");
-
+         setLoginPage();
+         setTempUser({});
+    }
+       
+  
+    
+      
     console.log(users);
   };
 
@@ -133,11 +142,23 @@ function App() {
   }, []);
 
   const setBackPage = (e) => {
+    setValidityMessage("");
+    setRegisterError("");
     setsRegister("Login");
+  };
+
+  const setLoginPage = (e) => {
+    setsRegister("Login");
+   /*  setRegistrationSuccess("!! Registration success. Please login to continue !!") */
+
   };
 
   const logOutClick = (e) =>{
     setUserVerified(false)
+    setLoggedInUser([]);
+    setTempLoginUser([]);
+    setValidityMessage("");
+
     console.log('You are  logged Out')
   }
 
@@ -154,6 +175,8 @@ function App() {
           onSaveHandler={onSaveHandler}
           setBackPage={setBackPage}
           validityMessage= {validityMessage}
+          registrationSuccess={registrationSuccess}
+          registerError= {registerError}
         />
       ) : (
         <LoggedIn

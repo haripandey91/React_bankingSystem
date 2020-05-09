@@ -1,6 +1,8 @@
 .loggedIn{
-    background-color: cornflowerblue;
-    height: 60vh;
+    background-color: #000f3d;
+    background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre-big.png");
+
+    height: 70vh;
     width: 70vw;
     margin-left: 15%;
     margin-top: 20px;
@@ -9,7 +11,7 @@
         text-align: center;
         color: white;
         padding: 10px;
-        background-color: rgb(38, 8, 109);
+        background-color: #000f3d;
 
     }
 
@@ -22,6 +24,7 @@
         margin-left: 22%;
         font-size: 17px;
         margin-top: 10px;
+        color: white;
         
     }
 
@@ -48,10 +51,13 @@
     }
 
     .logOutClassName{
-        margin-left: 85%;
-        margin-top: -14%;
+        margin-left: 85%; 
     }
 
     .inputClassName{
     
     }
+
+ .UserNameP{
+    background-color: #000f3d;
+ }

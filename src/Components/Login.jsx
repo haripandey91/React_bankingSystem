@@ -12,6 +12,7 @@ export default function Login(props) {
         <h5>{props.heading}</h5>
         </span>
         <p className="validationMessage">{props.validityMessage}</p>
+        <p className="RegistrationSuccess">{props.registrationSuccess}</p>
         <span  className="inputs">
             User ID:         <Input name={props.Uname} type={props.Usertype} id={props.UserId} value= {props.Uvalue} onChange = {props.onChange}/>
             Password:        <Input name={props.Pname} type={props.Passtype} id={props.PasswordId} value= {props.Pvalue} onChange = {props.onChange}/>

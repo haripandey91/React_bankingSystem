@@ -2,8 +2,9 @@
     margin-top: 40px;
     border: rgb(76, 14, 177) 1px solid;
     width:75%;
-    height: 80%;
-    background-color: rgb(150, 184, 248);
+    height: 60vh;
+    background-color: #000f3d;
+    background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre-big.png");
     display: flex;
     flex-wrap: wrap;
     padding: 2vw;
@@ -12,6 +13,7 @@
 
     .heading{
         width:100%;
+        color: white;
     }
      .inputs, .buttons{
         width:100%;
@@ -20,6 +22,7 @@
         flex-direction:column;
         justify-content: center;
         align-items: center;
+        color: white;
         input{
             width:60%
         }
@@ -27,4 +30,12 @@
         .buttons{
             flex-direction: row;
         }
+}
+
+.registerError{
+    color: white;
+    background-color: rgb(148, 44, 44);
+    font-size: 18px;
+    text-align: center;
+    margin-left: 35%;
 }

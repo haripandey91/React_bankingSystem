@@ -11,6 +11,8 @@ const Register = (props) => {
         Uvalue={props.Uvalue}
         Pname={props.Pname}
         Pvalue={props.Pvalue}
+        Usertype={props.Usertype}
+        Passtype={props.Passtype}
         onChange={props.onChange}
         RclassName={props.RclassName}
         LclassName={props.LclassName}
@@ -21,6 +23,7 @@ const Register = (props) => {
         Lvalue={props.Lvalue}
         heading={props.heading}
         validityMessage = {props.validityMessage}
+        registrationSuccess= {props.registrationSuccess}
       />
     </div>
   );

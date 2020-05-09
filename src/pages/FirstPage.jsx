@@ -15,6 +15,8 @@ const FirstPage = (props) => {
           UserId="userId"
           PasswordId="passwordId"
           type="password"
+          Usertype="password"
+          Passtype="password"
           onChange={props.onLoginInputHandler}
           RclassName="btn btn-info"
           LclassName="btn btn-success"
@@ -24,6 +26,7 @@ const FirstPage = (props) => {
           RonClick={props.onClickHandaler}
           LonClick={props.loginHandler}
           validityMessage= {props.validityMessage}
+          registrationSuccess= {props.registrationSuccess}
         />
       </div>
     ) : (
@@ -43,6 +46,7 @@ const FirstPage = (props) => {
         heading="Please register to continue"
         SaveonClick={props.onSaveHandler}
         BackonClick={props.setBackPage}
+        registerError= {props.registerError}
       />
     )}
   </div>);
