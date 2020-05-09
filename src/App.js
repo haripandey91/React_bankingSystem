@@ -25,6 +25,7 @@ function App() {
   const [registerError, setRegisterError] = useState();
   const [tempTransfer, setTempTransfer] = useState();
   const [transferError, setTransferError] = useState();
+  const [transferMessage, setTransferMessage] = useState();
 
   const onSubmitHandler = (e) => {
     let currentUserBalance = loggedInUser;
@@ -51,8 +52,7 @@ function App() {
     let receiverId = tempTransfer.idName;
     // Decucting from the current user part starts here
     let currentUserBalance = loggedInUser;
-    let newBalance =
-      currentUserBalance.balance - tempTransfer.transferAmountName;
+    let newBalance = currentUserBalance.balance - tempTransfer.transferAmountName;
     setLoggedInUser({
       id: loggedInUser.id,
       name: loggedInUser.name,
@@ -71,13 +71,14 @@ function App() {
     console.log(index.length, "the index: ", index);
     if (index) {
       let userCopy = [...users];
+      let nameOfAccountHolder = userCopy[index].name;
       let balanceAfterReceivedFund =
         userCopy[index].balance + tempTransfer.transferAmountName;
       userCopy[index].balance = balanceAfterReceivedFund;
       setUsers(userCopy);
-    } else if (index === -1) {
-      setTransferError("User not found !! Please give the valid User ID.");
-    } else {
+      setTransferMessage("You have transferred " + tempTransfer.transferAmountName + " € to " + nameOfAccountHolder )
+    } 
+    else {
       setTransferError("User not found !! Please give the valid User ID.");
     }
   };
@@ -269,13 +270,16 @@ function App() {
               transferIdClassName="transferIdClassName"
               // tranferIdValue={tranferIdValue}
               onChange={transferInputHandler}
+              onBackButtonClick = {transferClick==="login"}
+              BackclassName="btn btn-danger"
               idName="idName"
               transferAmountName="transferAmountName"
               transferAmountClassName="transferAmountClassName"
               transferOnClick={transferClicked}
               transferSubmitClick={transferSubmitClicked}
-              submitClassName="btn btn-success submitClassName"
+              submitClassName="btn btn-success submitClass"
               transferError={transferError}
+              transferMessage={transferMessage}
               transferClassName={
                 transferClick === "transfer"
                   ? "btn btn-danger transferClassName"
