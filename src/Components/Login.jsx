@@ -23,12 +23,7 @@ export default function Login(props) {
             </span>
         </div>
         <div>
-        <div className="userList">
-           Saved Users List:
-             {props.users && props.users.map(user => 
-             <span > <p> User Id => {user.id}, password => {user.password}, Username => {user.name}, Initial fund => {user.balance}</p></span>
-                 )}    
-         </div>
+        
      </div>
      </div>
     )

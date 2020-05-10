@@ -10,29 +10,32 @@ export default function Login(props) {
       </span>
       <p className="registerError">{props.registerError}</p>
       <span className="inputs">
-        Full name:{" "}
+      {/*   Full name:{" "} */}
         <Input
           name={props.Uname}
           id={props.RUserId}
           value={props.Uvalue}
           onChange={props.onChange}
           type={props.Utype}
+          placeholder="Please type your full name"
         />
-        Password:{" "}
+        {/* Password:{" "} */}
         <Input
           name={props.Pname}
           id={props.RPasswordId}
           value={props.Pvalue}
           onChange={props.onChange}
           type={props.Ptype}
+          placeholder="Please enter a password"
         />
-        Initial Cash Deposit :{" "}
+      {/*   Initial Cash Deposit :{" "} */}
         <Input
           name={props.InitialAmount}
           id={props.InitialAmountId}
           value={props.InitialAmountvalue}
           onChange={props.onChange}
           type={props.Atype}
+          placeholder="Please enter an amount to deposit"
         />
       </span>
       <span className="buttons">

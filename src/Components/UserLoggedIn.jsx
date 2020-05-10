@@ -1,6 +1,6 @@
 import React from 'react'
 import "../styles/userloggedin.scss"
-import Input from './Input'
+
 
 const LoggedIn = (props) => { 
     
@@ -17,8 +17,8 @@ const LoggedIn = (props) => {
                     <button onClick={props.transferOnClick} className={props.transferClassName} value={props.transferButtonValue}>{props.transferValue}</button>
                     <button onClick={props.depositOnClick} className={props.depositClassName} value={props.depositButtonValue}>{props.depositValue}</button>
                     <button onClick={props.withdrawOnClick} className={props.withdrawClassName} value={props.withdrawButtonValue}>{props.withdrawValue}</button>
-                    <label className="WithdrawMessage">{props.messageAfterLogin}</label>
-                    <Input name={props.AmountName} className={props.inputClassName} id={props.UserId} value= {props.AmountValue} onChange = {props.onChange}/>
+{/*                     <label className="WithdrawMessage">{props.messageAfterLogin}</label>
+ */}                    <input name={props.AmountName} placeholder={props.amountPlaceholder} className={props.inputClassName} id={props.UserId} value= {props.AmountValue} onChange = {props.onChange}/>
                     <button onClick={props.onClick} className={props.submitClassName} value={props.transferButtonValue}>{props.submitValue}</button>
                 </div> 
             </div>

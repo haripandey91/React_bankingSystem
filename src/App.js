@@ -9,7 +9,7 @@ import "./styles/app.scss";
 import Transfer from "./Components/Transfer";
 
 function App() {
-  let a = {idName: 91, transferAmountName: 100};
+  /*   let a = {idName: 91, transferAmountName: 100}; */
   const [sregister, setsRegister] = useState();
   const [users, setUsers] = useState(data);
   const [tempUser, setTempUser] = useState();
@@ -23,35 +23,28 @@ function App() {
   const [registerError, setRegisterError] = useState();
   const [tempTransfer, setTempTransfer] = useState();
   const [transferError, setTransferError] = useState();
-  const [transferMessage, setTransferMessage] = useState();
-  /* const [printUsersList, setPrintUsersList] = useState(); */
 
   const onSubmitHandler = (e) => {
     let currentUserBalance = loggedInUser;
     let currentUserBalanceAmount = loggedInUser.balance;
-    console.log(currentUserBalanceAmount)
+    console.log(currentUserBalanceAmount);
     let newBalance;
- /*    depositClicked === "deposit"
-      ? (newBalance = currentUserBalance.balance + tempDeposit[0].balance)
-      : ( { if(currentUserBalance.balance > tempDeposit[0].balance ){
-         newBalance = currentUserBalance.balance - tempDeposit[0].balance}
+    if (depositClicked === "deposit") {
+      newBalance = currentUserBalance.balance + tempDeposit[0].balance;
+    } else if (depositClicked === "withdraw") {
+      if (currentUserBalance.balance >= tempDeposit[0].balance) {
+        newBalance = currentUserBalance.balance - tempDeposit[0].balance;
+      } else if (currentUserBalance.balance < tempDeposit[0].balance) {
+        console.log(currentUserBalanceAmount);
+        newBalance = currentUserBalanceAmount;
+        setTransferError(
+          "!!! Withdrawl amount excessed the available fund. !!! "
+        );
       }
-       );
- */
-       if(depositClicked === "deposit"){
-        newBalance = currentUserBalance.balance + tempDeposit[0].balance;
-       }else if (depositClicked === "withdraw"){
-            if (currentUserBalance.balance >= tempDeposit[0].balance){
-            newBalance = currentUserBalance.balance - tempDeposit[0].balance
-          }else if(currentUserBalance.balance < tempDeposit[0].balance){
-            console.log(currentUserBalanceAmount)
-            newBalance = currentUserBalanceAmount;
-            setTransferError("!!! Withdrawl amount excessed the available fund. !!! ");
-            }
-       }else {
-         setDepositClicked("transfer");
-         console.log('Unusual condition')
-       }
+    } else {
+      setDepositClicked("transfer");
+      console.log("Unusual condition");
+    }
 
     //dataChange in Loginuser state
     setLoggedInUser({
@@ -68,42 +61,52 @@ function App() {
   };
 
   const transferSubmitClicked = () => {
-   let receiverId = tempTransfer.idName;
-    // Decucting from the current user part starts here
+    let receiverId = tempTransfer.idName;
+    // Deducting from the current user part starts here
     let currentUserBalance = loggedInUser;
-    if (tempTransfer.transferAmountName < currentUserBalance.balance || tempTransfer.transferAmountName == currentUserBalance.balance){  
-    let newBalance = currentUserBalance.balance - tempTransfer.transferAmountName;
-    setLoggedInUser({
-      id: loggedInUser.id,
-      name: loggedInUser.name,
-      balance: newBalance,
-      password: loggedInUser.password,
-    });
+    if (
+      tempTransfer.transferAmountName < currentUserBalance.balance ||
+      tempTransfer.transferAmountName === currentUserBalance.balance
+    ) {
+      let newBalance =
+        currentUserBalance.balance - tempTransfer.transferAmountName;
+      setLoggedInUser({
+        id: loggedInUser.id,
+        name: loggedInUser.name,
+        balance: newBalance,
+        password: loggedInUser.password,
+      });
 
-    let i = users.findIndex((item) => item.id === loggedInUser.id);
-    let temp = [...users];
-    temp[i].balance = newBalance;
-    setUsers(temp);
-    // Deducting from the current user ends here and users array is updated with new balance.
+      let i = users.findIndex((item) => item.id === loggedInUser.id);
+      let temp = [...users];
+      temp[i].balance = newBalance;
+      setUsers(temp);
+      // Deducting from the current user ends here and users array is updated with new balance.
 
-    //Now from here adding the transfered fund to the user starts.
-    let index = users.findIndex((item) => item.id === receiverId);
-    console.log(index.length, "the index: ", index);
-    if (index == 0 || index) {
-      let userCopy = [...users];
-      let nameOfAccountHolder = userCopy[index].name;
-      let balanceAfterReceivedFund =
-        userCopy[index].balance + tempTransfer.transferAmountName;
-      userCopy[index].balance = balanceAfterReceivedFund;
-      setUsers(userCopy);
-      setTransferError("You have transferred " + tempTransfer.transferAmountName + "€ to " + nameOfAccountHolder )
-    } 
-    else {
-      setTransferError("!!! User not found !! Please give the valid User ID. !!! ");
+      //Now from here adding the transfered fund to the user starts.
+      let index = users.findIndex((item) => item.id === receiverId);
+      console.log(index.length, "the index: ", index);
+      if (index === 0 || index) {
+        let userCopy = [...users];
+        let nameOfAccountHolder = userCopy[index].name;
+        let balanceAfterReceivedFund =
+          userCopy[index].balance + tempTransfer.transferAmountName;
+        userCopy[index].balance = balanceAfterReceivedFund;
+        setUsers(userCopy);
+        setTransferError(
+          "You have transferred " +
+            tempTransfer.transferAmountName +
+            "€ to " +
+            nameOfAccountHolder
+        );
+      } else {
+        setTransferError(
+          "!!! User not found !! Please give the valid User ID. !!! "
+        );
+      }
+    } else {
+      setTransferError("!!! Transfer amount excessed the available fund. !!!");
     }
-  }else{
-    setTransferError("!!! Transfer amount excessed the available fund. !!!");
-  }
   };
 
   const transferInputHandler = (e) => {
@@ -114,12 +117,11 @@ function App() {
     setTempTransfer({ ...tempTransfer, [name]: Number(value) });
   };
 
-
   const allInOne = (e) => {
     const value = e.target.value;
-    setDepositClicked(value)
-    setTransferError("")
-  }
+    setDepositClicked(value);
+    setTransferError("");
+  };
 
   const loginHandler = () => {
     const user = users.filter(
@@ -127,7 +129,7 @@ function App() {
         tempUser.id === Number(tempLoginUser.uname) &&
         tempUser.password === tempLoginUser.Lname
     );
-    setRegistrationSuccess("");
+
     if (user.length === 1) {
       setUserVerified(true);
       setLoggedInUser({
@@ -139,13 +141,15 @@ function App() {
     } else {
       setValidityMessage("!!  Please enter the valid information !!");
     }
-
+    setRegistrationSuccess("");
     console.log(loggedInUser);
   };
 
   const onClickHandaler = (e) => {
     setsRegister(e.target.value);
-    setTransferError("")
+    setRegistrationSuccess("");
+    setTransferError("");
+    setValidityMessage("");
   };
 
   const create_id = () => {
@@ -163,24 +167,25 @@ function App() {
   };
 
   const onSaveHandler = () => {
-    if(tempUser.Uname && tempUser.Pname && tempUser.InitialAmount){
-    setUsers([
-      ...users,
-      {
-        name: tempUser.Uname,
-        password: tempUser.Pname,
-        balance: Number(tempUser.InitialAmount),
-        id: create_id(),
-      },
-    ]);
-    setLoginPage();
-    setTempUser({});
-    console.log(users);
-  }
-  
-      else {
+    if (tempUser.Uname && tempUser.Pname && tempUser.InitialAmount) {
+      setUsers([
+        ...users,
+        {
+          name: tempUser.Uname,
+          password: tempUser.Pname,
+          balance: Number(tempUser.InitialAmount),
+          id: create_id(),
+        },
+      ]);
+      setLoginPage();
+      setTempUser({});
+      setRegistrationSuccess(
+        "Registration was successful."
+      );
+      console.log(users);
+    } else {
       setRegisterError("!! Please fill the information first !!");
-    } 
+    }
   };
 
   const onLoginInputHandler = (e) => {
@@ -214,7 +219,6 @@ function App() {
 
   const setLoginPage = (e) => {
     setsRegister("Login");
-    /*  setRegistrationSuccess("!! Registration success. Please login to continue !!") */
   };
 
   const logOutClick = (e) => {
@@ -222,8 +226,9 @@ function App() {
     setLoggedInUser([]);
     setTempLoginUser([]);
     setValidityMessage("");
-    setTransferMessage('')
     setTempTransfer();
+    setRegistrationSuccess();
+    setRegistrationSuccess("You have been logged out!!");
   };
 
   return (
@@ -241,13 +246,11 @@ function App() {
           validityMessage={validityMessage}
           registrationSuccess={registrationSuccess}
           registerError={registerError}
-/*           usersPasswords={printUsersList}
-          usersIds={printUsersList} */
           users={users}
         />
       ) : (
         <div>
-          {depositClicked === "deposit" || depositClicked === "withdraw"  ? (
+          {depositClicked === "deposit" || depositClicked === "withdraw" ? (
             <LoggedIn
               depositClassName={
                 depositClicked === "deposit"
@@ -268,6 +271,11 @@ function App() {
               withdrawValue="Withdraw"
               transferButtonValue="transfer"
               inputClassName="inputClassName"
+              amountPlaceholder={
+                depositClicked === "deposit"
+                  ? "How much you would like to DEPOSIT?"
+                  : "How much you would like to WITHDRAW?"
+              }
               AmountName={tempDeposit.name}
               AmountValue={tempDeposit.AmountValue}
               withdrawButtonValue="withdraw"
@@ -285,7 +293,7 @@ function App() {
               }
               transferValue="Transfer Funds"
               transferOnClick={allInOne}
-              funds={loggedInUser.balance + ' € '}
+              funds={loggedInUser.balance + " € "}
               messageAfterLogin={
                 depositClicked === "withdraw"
                   ? "How much you would like to WITHDRAW?"
@@ -297,12 +305,12 @@ function App() {
               loggedInUserName={loggedInUser.name}
               logOutClick={logOutClick}
               logOutClassName="btn btn-dark logOutClassName"
-              funds={loggedInUser.balance + ' € '}
+              funds={loggedInUser.balance + " € "}
               depositOnClick={allInOne}
               withdrawOnClick={allInOne}
               transferIdClassName="transferIdClassName"
               onChange={transferInputHandler}
-              onBackButtonClick = {allInOne}
+              onBackButtonClick={allInOne}
               backButtonTransferValue="deposit"
               BackclassName="btn btn-danger"
               idName="idName"
@@ -331,6 +339,20 @@ function App() {
           )}
         </div>
       )}
+      <div className="userList">
+        Saved Users List:
+        {users &&
+          users.map((user) => (
+            <span>
+              {" "}
+              <p>
+                {" "}
+                User Id => {user.id}, password => {user.password}, Username =>{" "}
+                {user.name}, Initial fund => {user.balance}
+              </p>
+            </span>
+          ))}
+      </div>
       <Footer />
     </div>
   );

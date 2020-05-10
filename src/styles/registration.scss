@@ -1,19 +1,20 @@
 .registration{
     margin-top: 40px;
     border: rgb(252, 250, 255) 2px solid;
-    width:75%;
-    height: 60vh;
+    width:65%;
+    height: 50vh;
     background-color: #0b063a00;
     background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre-big.png");
     display: flex;
     flex-wrap: wrap;
     padding: 2vw;
-    margin-left: 12%;
+    margin-left: 18%;
    
 
     .heading{
         width:100%;
         color: white;
+        text-align: center;
     }
      .inputs, .buttons{
         width:100%;
@@ -39,9 +40,6 @@
     text-align: center;
     margin-left: 35%;
 }
-.RegistrationSuccess{
-    color: rgb(18, 156, 18);
-    font-size: 18px;
-    text-align: center;
-  }
-  
+.RegistrationclassName, .BackclassName{
+    width: 80px !important;
+}

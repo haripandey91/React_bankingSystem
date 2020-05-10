@@ -21,7 +21,7 @@ const FirstPage = (props) => {
           LclassName="btn btn-success"
           Rvalue="Register"
           Lvalue="Login"
-          heading=""
+          heading="Please enter the information to login"
           RonClick={props.onClickHandaler}
           LonClick={props.loginHandler}
           validityMessage= {props.validityMessage}
@@ -41,8 +41,8 @@ const FirstPage = (props) => {
         Ptype="password"
         onChange={props.onChangeHandaler}
         InitialAmountId="initialAmountId"
-        RegistrationclassName="btn btn-success"
-        BackclassName="btn btn-danger"
+        RegistrationclassName="btn btn-success RegistrationclassName"
+        BackclassName="btn btn-danger BackclassName"
         Registrationvalue="Save"
         BackButtonvalue="Back"
         heading="Please register to continue"
