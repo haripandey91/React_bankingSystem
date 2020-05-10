@@ -14,6 +14,7 @@ const LoggedIn = (props) => {
                     <label className="totalFunds">Total Available Funds: {props.funds}</label>
                     </div> 
                     <p className="transferError">{props.depositError}</p>
+                    <button onClick={props.RequestOnClick} className={props.requestClassName} value={props.requestButtonValue}>{props.requestValue}</button>
                     <button onClick={props.transferOnClick} className={props.transferClassName} value={props.transferButtonValue}>{props.transferValue}</button>
                     <button onClick={props.depositOnClick} className={props.depositClassName} value={props.depositButtonValue}>{props.depositValue}</button>
                     <button onClick={props.withdrawOnClick} className={props.withdrawClassName} value={props.withdrawButtonValue}>{props.withdrawValue}</button>

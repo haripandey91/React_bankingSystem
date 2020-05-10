@@ -38,10 +38,13 @@
 }
 
    .transferClassName{
-        margin-left: 56%;
     }
 
-    .transferClassNameForButton, .withdrawClassName,.depositClassNameForButton{
+    .requestClassName{
+        margin-left: 48%;
+    }
+
+    .requestClassName, .transferClassNameForButton, .withdrawClassName,.depositClassNameForButton{
         background-color:#4f5353 ;
     }
 
@@ -68,3 +71,7 @@
      background-color: rgb(199, 199, 199);
      border-radius: 5px;
  }
+
+ .transferError{
+    color: rgb(253, 112, 112) !important;
+}

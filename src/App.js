@@ -7,6 +7,7 @@ import LoggedIn from "./Components/UserLoggedIn";
 import data from "./Components/users.json";
 import "./styles/app.scss";
 import Transfer from "./Components/Transfer";
+import Request from './Components/Request'
 
 function App() {
   /*   let a = {idName: 91, transferAmountName: 100}; */
@@ -23,6 +24,19 @@ function App() {
   const [registerError, setRegisterError] = useState();
   const [tempTransfer, setTempTransfer] = useState();
   const [transferError, setTransferError] = useState();
+  const [requestValue, setRequestValue] = useState();
+
+
+  const requestClicked = (e) => {
+    let currentUser = loggedInUser;
+  }
+
+  const requestInputHandler = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setRequestValue({ ...requestValue, [name]: value });
+    console.log(name, value, requestValue)
+  };
 
   const onSubmitHandler = (e) => {
     let currentUserBalance = loggedInUser;
@@ -121,6 +135,7 @@ function App() {
     const value = e.target.value;
     setDepositClicked(value);
     setTransferError("");
+    console.log(value)
   };
 
   const loginHandler = () => {
@@ -270,6 +285,7 @@ function App() {
               depositValue="Deposit"
               withdrawValue="Withdraw"
               transferButtonValue="transfer"
+              requestButtonValue="request"
               inputClassName="inputClassName"
               amountPlaceholder={
                 depositClicked === "deposit"
@@ -299,15 +315,22 @@ function App() {
                   ? "How much you would like to WITHDRAW?"
                   : "How much you would like to DEPOSIT?"
               }
+              RequestOnClick={allInOne}
+              requestClassName="btn requestClassName"
+              requestButtonValue="request"
+              requestValue="Request Fund"
+
+
             />
           ) : (
-            <Transfer
+            <div>
+              
+            {depositClicked === "transfer" ? (
+              <Transfer
               loggedInUserName={loggedInUser.name}
               logOutClick={logOutClick}
               logOutClassName="btn btn-dark logOutClassName"
               funds={loggedInUser.balance + " € "}
-              depositOnClick={allInOne}
-              withdrawOnClick={allInOne}
               transferIdClassName="transferIdClassName"
               onChange={transferInputHandler}
               onBackButtonClick={allInOne}
@@ -316,7 +339,7 @@ function App() {
               idName="idName"
               transferAmountName="transferAmountName"
               transferAmountClassName="transferAmountClassName"
-              transferOnClick={allInOne}
+              //transferOnClick={allInOne}
               transferSubmitClick={transferSubmitClicked}
               submitClassName="btn btn-success submitClass"
               transferError={transferError}
@@ -336,6 +359,23 @@ function App() {
                   : " btn withdrawClassName"
               }
             />
+            ):( 
+          <Request
+          loggedInUserName={loggedInUser.name}
+          logOutClick={logOutClick}
+          logOutClassName="btn btn-dark logOutClassName"
+          funds={loggedInUser.balance + " € "}
+          requestError={transferError}
+          requestIdName="rIdName"
+          requestAmountName="requestAmountName"
+          onChange={requestInputHandler}
+          backButtonTransferValue="deposit"
+          onBackButtonClick={allInOne}
+          requestButtonClick={requestClicked}
+          requestButtonClassName="btn btn-success requestButtonClassName"
+
+          />)}
+          </div>
           )}
         </div>
       )}
