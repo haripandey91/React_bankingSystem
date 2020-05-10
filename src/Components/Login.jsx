@@ -2,7 +2,6 @@ import React from 'react'
 import Input from "./Input"
 import Button from "./Button"
 import "../styles/login.scss"
-import FirstPage from '../pages/FirstPage'
 
 export default function Login(props) {
     console.log(props.validityMessage)
@@ -15,8 +14,8 @@ export default function Login(props) {
         <p className="validationMessage">{props.validityMessage}</p>
         <p className="RegistrationSuccess">{props.registrationSuccess}</p>
         <span  className="inputs">
-            User ID:         <Input name={props.Uname} type={props.Usertype} id={props.UserId} value= {props.Uvalue} onChange = {props.onChange}/>
-            Password:        <Input name={props.Pname} type={props.Passtype} id={props.PasswordId} value= {props.Pvalue} onChange = {props.onChange}/>
+                   <Input name={props.Uname} placeholder=" User ID " type={props.Usertype} id={props.UserId} value= {props.Uvalue} onChange = {props.onChange}/>
+                    <Input name={props.Pname} placeholder=" Password "type={props.Passtype} id={props.PasswordId} value= {props.Pvalue} onChange = {props.onChange}/>
             </span> 
             <span className="buttons">           
             <Button className={props.RclassName} value = {props.Rvalue} onClick={(e)=>props.RonClick(e)}/>
@@ -25,10 +24,9 @@ export default function Login(props) {
         </div>
         <div>
         <div className="userList">
-            Users List:
+           Saved Users List:
              {props.users && props.users.map(user => 
              <span > <p> User Id => {user.id}, password => {user.password}, Username => {user.name}, Initial fund => {user.balance}</p></span>
-          //console.log(user)
                  )}    
          </div>
      </div>

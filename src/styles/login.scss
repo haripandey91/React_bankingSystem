@@ -10,7 +10,7 @@
     display: flex;
     flex-wrap: wrap;
     padding: 2vw;
-    margin-left: 10%;
+    margin-left: 18%;
    
 
     .heading{
@@ -27,12 +27,15 @@
         color: white;
        
         input{
-            width:60%
+            width:50%
+            
             
         }
         }
         .buttons{
             flex-direction: row;
+            margin-left: 3.5%;
+            
         }
 }
 .validationMessage{
@@ -48,5 +51,7 @@
 }
 
 .userList{
+    margin-top: 5px;
     color: rgb(129, 109, 109);
+   text-align: center;
 }

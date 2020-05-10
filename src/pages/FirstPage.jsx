@@ -1,7 +1,6 @@
 import React from "react";
 import Register from "./Register";
 import Registration from "../Components/Registration";
-import Login from '../Components/Login'
 
 const FirstPage = (props) => {
   console.log(props.validityMessage)
@@ -22,7 +21,7 @@ const FirstPage = (props) => {
           LclassName="btn btn-success"
           Rvalue="Register"
           Lvalue="Login"
-          heading="Please login to continue"
+          heading=""
           RonClick={props.onClickHandaler}
           LonClick={props.loginHandler}
           validityMessage= {props.validityMessage}

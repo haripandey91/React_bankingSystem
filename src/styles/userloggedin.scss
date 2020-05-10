@@ -2,29 +2,30 @@
     background-color: #0b063a00;
     background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre-big.png");
     border: solid 2px white;
-    height: 70vh;
-    width: 70vw;
-    margin-left: 15%;
+    height: 60vh;
+    width: 60vw;
+    margin-left: 20%;
     margin-top: 20px;
 
     p {
         text-align: center;
         color: white;
         padding: 10px;
-        //background-color: #000f3d;
+       
 
     }
 
     .totalFundsDiv{
         padding-left: 30px;
-        padding-bottom: 5px;
+        padding-bottom: 10px;
     }
 
     .WithdrawMessage{
         margin-left: 22%;
         font-size: 17px;
-        margin-top: 10px;
+        margin-top: 15px;
         color: white;
+        margin-left: 33%;
         
     }
 
@@ -32,7 +33,7 @@
     .totalFunds{
         text-decoration:wavy;
         text-shadow: hue(rgb(6, 2, 19));
-        background-color:rgb(59, 238, 104);
+        background-color:rgb(255, 187, 0);
     }
 }
 
@@ -46,7 +47,7 @@
 
     
     .submitClassName{
-        margin-left: 53%;
+        margin-left: 60%;
         background-color: #0a1979;
     }
 
@@ -54,10 +55,12 @@
         margin-left: 85%; 
     }
 
-    .inputClassName{
-    
-    }
 
  .UserNameP{
     background-color: #000f3d;
+ }
+
+ .inputClassName{
+     margin-left: 30%;
+     width: 10% !important
  }

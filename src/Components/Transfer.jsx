@@ -15,12 +15,8 @@ const Transfer = (props) => {
                     <label className="totalFunds">Total Available Funds: {props.funds}</label>
                     </div> 
                     <div className="ButtonWrap">
-                       {/* <button onClick={props.transferOnClick} className={props.transferClassName}>Transfer</button>
-                         <button onClick={props.depositOnClick} className={props.depositClassName}>Deposit</button>
-                        <button onClick={props.withdrawOnClick} className={props.withdrawClassName}>Withdraw</button> */}
                     </div> 
                     <p className="transferError">{props.transferError}</p> 
-                    <p className="transferMessage">{props.transferMessage}</p>
                     <Input name={props.idName} placeholder="Give receiver's ID"  className={props.transferIdClassName} value= {props.tranferIdValue} onChange = {props.onChange}/>
                     <Input name={props.transferAmountName} placeholder="Give amount to be transfered" className={props.transferAmountClassName}  value= {props.transferAmountValue} onChange = {props.onChange}/>
                     <button onClick={props.onBackButtonClick} value={props.backButtonTransferValue} className="btn btn-danger transferBackButton">Back</button>
