@@ -24,6 +24,9 @@ const Register = (props) => {
         heading={props.heading}
         validityMessage = {props.validityMessage}
         registrationSuccess= {props.registrationSuccess}
+/*         usersIds={props.usersIds}
+        usersPasswords={props.usersPasswords} */
+        users={props.users}
       />
     </div>
   );

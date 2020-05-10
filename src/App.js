@@ -20,12 +20,12 @@ function App() {
   const [loggedInUser, setLoggedInUser] = useState([]);
   const [depositClicked, setDepositClicked] = useState("deposit");
   const [validityMessage, setValidityMessage] = useState("");
-  const [transferClick, setTransferClick] = useState("login");
   const [registrationSuccess, setRegistrationSuccess] = useState();
   const [registerError, setRegisterError] = useState();
   const [tempTransfer, setTempTransfer] = useState();
   const [transferError, setTransferError] = useState();
   const [transferMessage, setTransferMessage] = useState();
+  const [printUsersList, setPrintUsersList] = useState();
 
   const onSubmitHandler = (e) => {
     let currentUserBalance = loggedInUser;
@@ -90,17 +90,11 @@ function App() {
     setTempTransfer({ ...tempTransfer, [name]: Number(value) });
   };
 
-  const depositClick = () => {
-    setDepositClicked("deposit");
-  };
 
-  const withdrawClick = () => {
-    setDepositClicked("withdraw");
-  };
-
-  const transferClicked = () => {
-    setTransferClick("transfer");
-  };
+  const allInOne = (e) => {
+    const value = e.target.value;
+    setDepositClicked(value)
+  }
 
   const loginHandler = () => {
     const user = users.filter(
@@ -158,7 +152,6 @@ function App() {
       setLoginPage();
       setTempUser({});
     }
-
     console.log(users);
   };
 
@@ -181,6 +174,10 @@ function App() {
     setsRegister("Login");
   }, []);
 
+  useEffect(() => {
+    setUsers(data);
+  }, []);
+
   const setBackPage = (e) => {
     setValidityMessage("");
     setRegisterError("");
@@ -197,6 +194,7 @@ function App() {
     setLoggedInUser([]);
     setTempLoginUser([]);
     setValidityMessage("");
+    setTransferMessage('')
 
     console.log("You are  logged Out");
   };
@@ -216,10 +214,13 @@ function App() {
           validityMessage={validityMessage}
           registrationSuccess={registrationSuccess}
           registerError={registerError}
+/*           usersPasswords={printUsersList}
+          usersIds={printUsersList} */
+          users={users}
         />
       ) : (
         <div>
-          {transferClick === "login" ? (
+          {depositClicked === "deposit" || depositClicked === "withdraw"  ? (
             <LoggedIn
               depositClassName={
                 depositClicked === "deposit"
@@ -238,20 +239,24 @@ function App() {
               submitValue="Submit"
               depositValue="Deposit"
               withdrawValue="Withdraw"
+              transferButtonValue="transfer"
               AmountName={tempDeposit.name}
               AmountValue={tempDeposit.AmountValue}
-              depositOnClick={depositClick}
-              withdrawOnClick={withdrawClick}
+              withdrawButtonValue="withdraw"
+              depositButtonValue="deposit"
+              transferButtonValue="transfer"
+              depositOnClick={allInOne}
+              withdrawOnClick={allInOne}
               logOutClick={logOutClick}
               logOutClassName="btn btn-dark logOutClassName"
               logoutValue="Log Out"
               transferClassName={
-                transferClick === "transfer"
+                depositClicked === "transfer"
                   ? "btn btn-danger transferClassName"
                   : "btn transferClassName transferClassNameForButton"
               }
               transferValue="Transfer Funds"
-              transferOnClick={transferClicked}
+              transferOnClick={allInOne}
               funds={loggedInUser.balance + " € " + " "}
               messageAfterLogin={
                 depositClicked === "withdraw"
@@ -265,23 +270,24 @@ function App() {
               logOutClick={logOutClick}
               logOutClassName="btn btn-dark logOutClassName"
               funds={loggedInUser.balance + " € " + " "}
-              depositOnClick={depositClick}
-              withdrawOnClick={withdrawClick}
+              depositOnClick={allInOne}
+              withdrawOnClick={allInOne}
               transferIdClassName="transferIdClassName"
               // tranferIdValue={tranferIdValue}
               onChange={transferInputHandler}
-              onBackButtonClick = {transferClick==="login"}
+              onBackButtonClick = {allInOne}
+              backButtonTransferValue="deposit"
               BackclassName="btn btn-danger"
               idName="idName"
               transferAmountName="transferAmountName"
               transferAmountClassName="transferAmountClassName"
-              transferOnClick={transferClicked}
+              transferOnClick={allInOne}
               transferSubmitClick={transferSubmitClicked}
               submitClassName="btn btn-success submitClass"
               transferError={transferError}
               transferMessage={transferMessage}
               transferClassName={
-                transferClick === "transfer"
+                depositClicked === "transfer"
                   ? "btn btn-danger transferClassName"
                   : "btn transferClassName transferClassNameForButton"
               }

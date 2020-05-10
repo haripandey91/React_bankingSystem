@@ -20,10 +20,10 @@ const Transfer = (props) => {
                         <button onClick={props.withdrawOnClick} className={props.withdrawClassName}>Withdraw</button> */}
                     </div> 
                     <p className="transferError">{props.transferError}</p> 
-                    <p className="transferMessage">{props.transferMessage}</p>   
+                    <p className="transferMessage">{props.transferMessage}</p>
                     <Input name={props.idName} placeholder="Give receiver's ID"  className={props.transferIdClassName} value= {props.tranferIdValue} onChange = {props.onChange}/>
                     <Input name={props.transferAmountName} placeholder="Give amount to be transfered" className={props.transferAmountClassName}  value= {props.transferAmountValue} onChange = {props.onChange}/>
-                    <button onClick={props.onBackButtonClick} className="btn btn-danger transferBackButton">Back</button>
+                    <button onClick={props.onBackButtonClick} value={props.backButtonTransferValue} className="btn btn-danger transferBackButton">Back</button>
                     <button onClick={props.transferSubmitClick} className={props.submitClassName}>Transfer</button>
 
                 </div> 

@@ -27,6 +27,9 @@ const FirstPage = (props) => {
           LonClick={props.loginHandler}
           validityMessage= {props.validityMessage}
           registrationSuccess= {props.registrationSuccess}
+/*           usersPasswords={props.usersIds}
+          usersIds={props.usersIds} */
+          users={props.users}
         />
       </div>
     ) : (

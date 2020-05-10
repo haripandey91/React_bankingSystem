@@ -7,6 +7,7 @@ import FirstPage from '../pages/FirstPage'
 export default function Login(props) {
     console.log(props.validityMessage)
     return (
+        <div>
         <div className="login"> 
         <span className="heading">
         <h5>{props.heading}</h5>
@@ -22,5 +23,15 @@ export default function Login(props) {
             <Button className={props.LclassName} value = {props.Lvalue} onClick={props.LonClick}/>
             </span>
         </div>
+        <div>
+        <div className="userList">
+            Users List:
+             {props.users && props.users.map(user => 
+             <span > <p> User Id => {user.id}, password => {user.password}, Username => {user.name}, Initial fund => {user.balance}</p></span>
+          //console.log(user)
+                 )}    
+         </div>
+     </div>
+     </div>
     )
 }
